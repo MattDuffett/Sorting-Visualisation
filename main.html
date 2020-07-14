@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="This is a meta description">
+    <meta name="viewport" content="width=device-width, initial_scale=1">
+    <title>Canvas Resize</title>
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <button onclick="run()">Run</button>
+        <button onclick="reset()">Reset</button>
+        <div class="dropdown">
+        <button id='DropDownButton' class="dropbtn" onclick="ShowDropDown()">Bubble Sort
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <button onclick='chooseBubbleSort()'> Bubble Sort</button>
+          <button onclick = 'chooseMergeSort()'> Merge Sort</button>
+          <button> Algo 3</button>
+        </div>
+        </div> 
+      </div>
+    <canvas></canvas>
+
+</body>
+<script src="DataSet.js"></script>
+<script src="SortingAlgorithm.js"></script>
+<script src="BubbleSort.js"></script>
+<script src="MergeSort.js"></script>
+<script src="DataBar.js"></script>
+<script src="main.js"></script>
+
+</html>
