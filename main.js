@@ -84,8 +84,10 @@ async function run() {
     switch(algo) {
         case 0:
             await BubbleSort(data);
+            break;
         case 1:
-
+            await QuickSort(data,0,arraySize-1);
+            console.log("QuickSort!!");
             break;
         default:
 
@@ -94,11 +96,11 @@ async function run() {
 
 function reset() {
     SetArraySize();
-    barWidth = Math.round(canvas.width / arraySize);
+    barWidth = Math.trunc(canvas.width / arraySize);
     data = new Array(arraySize);
     colours = new Array(arraySize);
     for(var i = 0; i < arraySize;i++) {
-        data[i] = Math.random()*(canvas.height-70);
+        data[i] = Math.round(Math.random()*(canvas.height-70));
         colours[i] = '#000000';
     }
 }

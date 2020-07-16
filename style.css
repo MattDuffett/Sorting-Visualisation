@@ -15,6 +15,17 @@
     font-family: inherit;
     margin: 0;
   }
+  .navbar input{
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px;
+    background-color: darkgray;
+    font-family: inherit;
+    margin: 0;
+    width: 70px;
+  }
   .navbar label {
     font-size: 16px;  
     border: none;
