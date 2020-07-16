@@ -52,38 +52,65 @@ window.addEventListener('mouseup', function (event) {
     rightMouseDown = false;
 })
 
+var input = document.getElementById("arraySize");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("Submit").click();
+  }
+});
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 function ShowDropDown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-var sortingAlgo;
-function init() {
-    switch(algo) {
-        case 0:
-            sortingAlgo = new BubbleSort(new DataSet(150));
-            break;
-        case 1:
-            sortingAlgo = new MergeSort(new DataSet(150));
-            break;
-        default:
-            sortingAlgo = new BubbleSort(new DataSet(150));
-      }
-    
+function SetArraySize() {
+    arraySize = document.getElementById("arraySize").value;
+    if(arraySize == ""){
+        arraySize = 150;
+        document.getElementById("arraySize").value = 150;
+    }
 }
 
-function run() {
-    sortingAlgo.run = true;
+function init() {
+    reset();
+}
+
+async function run() {
+    switch(algo) {
+        case 0:
+            await BubbleSort(data);
+        case 1:
+
+            break;
+        default:
+
+      }
 }
 
 function reset() {
-    init();
+    SetArraySize();
+    barWidth = Math.round(canvas.width / arraySize);
+    data = new Array(arraySize);
+    colours = new Array(arraySize);
+    for(var i = 0; i < arraySize;i++) {
+        data[i] = Math.random()*(canvas.height-70);
+        colours[i] = '#000000';
+    }
 }
 
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
 
-    sortingAlgo.animate(c);
+    for(var i = 0; i < arraySize;i++) {
+        c.fillStyle = colours[i];
+        c.fillRect(i*barWidth,0,barWidth,data[i]);
+    }
 }
 
 init();
