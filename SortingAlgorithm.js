@@ -2,6 +2,7 @@ var algo = 0;
 var arraySize = 150;
 var barWidth;
 var data;
+var tempData;
 var colours;
 var sleepTime = 5;
 
@@ -15,6 +16,17 @@ function chooseBubbleSort() {
 function chooseQuickSort() {
     document.getElementById('DropDownButton').innerHTML = 'QuickSort';
     algo = 1;
+    init();
+}
+function chooseCocktail() {
+    document.getElementById('DropDownButton').innerHTML = 'Cocktail Shaker';
+    algo = 2;
+    init();
+}
+
+function chooseMergeSort() {
+    document.getElementById('DropDownButton').innerHTML = 'Merge Sort';
+    algo = 3;
     init();
 }
 
@@ -77,6 +89,84 @@ async function Partition(arr, low, high) {
     }
 }
 
+async function CocktailSort(arr){
+    var swapped;
+    var start = 0;
+    var end = arr.length-1;
+    do {
+        swapped = false;
+        sleep(sleepTime);
+        for(var i = start; i < end;i++){
+            if(arr[i] > arr[i+1]){
+                colours[i]='#FF0000';
+                colours[i+1]='#FF0000';
+                await Swap(arr,i,i+1);
+                swapped=true;
+            }
+        }
+        for (var j = 0; j < arr.length - i; j++) {
+            colours[j]='#000000';
+        }
+        end--;
+        if(!swapped){
+            return;
+        }
+        swapped=false;
+        await sleep(sleepTime);
+        for(var i = end;i>=start;i--){
+            if(arr[i]>arr[i+1]){
+                colours[i]='#FF0000';
+                colours[i+1]='#FF0000';
+                await Swap(arr,i,i+1);
+                swapped=true;
+            }
+        }
+        for (var j = 0; j < arr.length - i; j++) {
+            colours[j]='#000000';
+        }
+        start++;
+    } while(swapped)
+}
+
+async function MergeSort(A,B,n) {
+    CopyArray(A, 0, n, B);
+    await SplitMerge(B, 0, n, A);
+}
+
+async function SplitMerge(B,begin,end,A){
+    if(end - begin <= 1) {
+        return;
+    }
+    var mid = Math.trunc((end+begin)/2);
+
+    await Promise.all([await SplitMerge(A,begin,mid,B),await SplitMerge(A,mid,end,B)]);
+    await Merge(B,begin,mid,end,A);
+}
+
+async function Merge(A,begin,mid,end,B){
+    var i = begin;
+    var j = mid;
+
+    for(var k = begin; k < end; k++){
+        if(k%30==0) await sleep(sleepTime);
+        colours[k-1] = '#000000';
+        colours[k] = '#FF0000';
+        if(i < mid && (j >= end || A[i] <= A[j])){
+            B[k] = A[i];
+            i++;
+        } else {
+            B[k] = A[j];
+            j++;
+        }
+    }
+}
+
+async function CopyArray(A, iBegin, iEnd, B)
+{
+    for(k = iBegin; k < iEnd; k++){
+        B[k] = A[k];
+    }
+}
 async function Swap(arr, first, second) {
     temp = arr[first];
     arr[first] = arr[second];
