@@ -81,6 +81,7 @@ function init() {
 }
 
 async function run() {
+    setSleepTime();
     switch (algo) {
         case 0:
             await BubbleSort(data);
